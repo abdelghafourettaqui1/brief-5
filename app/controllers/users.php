@@ -1,15 +1,14 @@
 <?php
-
 class users extends controller
 {
-  public function index () {
+  public function index()
+  {
     $this->model = $this->model('user');
     $flights = $this->model->getAllflights();
     $this->view('user/userflight', ['user' => $flights]);
-
   }
-  
-  
+
+
   public function showpassenger()
   {
     $this->model = $this->model('user');
@@ -57,15 +56,36 @@ class users extends controller
   }
   public function booking()
   {
+
     $this->model = $this->model('user');
     $flights = $this->model->getpassenger();
     $this->view('user/user', ['user' => $flights]);
     if (isset($_POST['reserve'])) {
       $this->view('user/user', ['id' => $_POST['booking']]);
+      $_SESSION['idflight'] = $_POST['booking'];
     }
-   
-    
   }
+
+  public function validate()
+  {
+    if (isset($_POST['validate'])) {
+      $idpassenger = $_POST['validate'];
+      $this->model = $this->model('user');
+      $results = $this->model->checkplace();
+      // $this->model->insertbooking($idpassenger);
+      if ($results > 0) {
+        $this->model = $this->model('user');
+        $this->model->insertbooking($idpassenger);
+      }
+      else{
+        echo '<script> alert("Sorry all the seats are reserved")</script>';
+        $this->view('users/index',[]);
+      }
+    }
+  }
+
+
+
   //   public function showFormadd()
   //   { 
   //       $this->view('user/user.php');

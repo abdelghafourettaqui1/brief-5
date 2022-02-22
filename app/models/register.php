@@ -32,7 +32,7 @@ class register extends Connection
         $admin = $this->connect()->query (" SELECT * FROM `admin` WHERE `password`= '$password' AND `email` = '$email' ");
         $data=[
             'user'=>$user,
-            'amdin'=>$admin,
+            'admin'=>$admin,
         ];
         return $data;
     }

@@ -29,10 +29,9 @@
                 <th>Departure place</th>
                 <th>Arrival place</th>
                 <th>Departure date</th>
-                <th>Passenger number</th>
-                <th>Place number</th>
                 <th>Price</th>
                 <th>Reserve</th>
+                <th>Flight type</th>
             </tr>
         </thead>
         <tbody>
@@ -47,14 +46,16 @@
                     <td><?= $datavalue['departurePlace'] ?></td>
                     <td><?= $datavalue['arrivalPlace']  ?> </td>
                     <td><?= $datavalue['departureDate']  ?></td>
-                    <td><?= $datavalue['passengerNumber'] ?></td>
-                    <td><?= $datavalue['placeNumber'] ?></td>
                     <td><?= $datavalue['price'] . "<br>" ?></td>
                     <td>
                         <form action="<?= URL ?> users/booking" method="post">
                             <input type="hidden" name='booking' value="<?= $datavalue['id'] ?>">
                             <button type="submit" name='reserve' class="btn btn-outline-danger">Reserve</button>
                         </form>
+                    </td>
+                    <td>
+                    <button type="submit" name='one way' class="btn btn-outline-info">One way</button>
+                    <button type="submit" name='round-trip' class="btn btn-outline-primary">Round-trip</button> 
                     </td>
 
                 </tr>

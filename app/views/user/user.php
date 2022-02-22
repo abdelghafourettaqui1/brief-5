@@ -1,17 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+<!-- <?php
+
+        // print_r($_SESSION);
+
+        ?> -->
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/b5682ff9f5.js" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
     <title>flight dream</title>
 </head>
 
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-info">
+    <nav class="navbar navbar-expand-lg navbar-light bg-info">
         <div class="container-fluid">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -25,7 +31,7 @@
         </div>
     </nav>
 
-<h1 class="text-center my-4 fw-bold fs-2 "> Passenger</h1>
+    <h1 class="text-center my-4 fw-bold fs-2 "> Passenger</h1>
 
 
     <table class="table mx-0 my-5">
@@ -68,25 +74,55 @@
                             <button type="submit" class="btn btn-outline-success">Update</button>
                         </form>
                     </td>
+                    <td>
+                        <form action="<?= URL ?>users/validate" method="post">
+                            <input type="hidden" name='validate' value="<?= $datavalue['idPassenger'] ?>">
+                            <button type="submit" class="btn btn-primary">Validate</button>
+                        </form>
+                    </td>
                 </tr>
             <?php endforeach; ?>
         </tbody>
     </table>
+    <div class="mx-auto ">
+        <button type="submit" class="btn mx-5 btn-danger"><i class="fa-solid fa-square-plus"></i> Add passenger </button>
 
-    <h1 class="text-center my-4 fw-bold fs-2 ">Add passenger</h1>
+    </div>
 
 
-    <form class=" border border-dark border-3 rounded-3 col-sm-3 row  my-1 mx-auto p-4 " action="<?= URL ?>users/addpassenger" method="post">
-        <input type="text" name="firstname" placeholder="Firstname" class="mb-2 rounded-3 border-2 border border-dark">
-        <input type="text" name="lastname" placeholder="Lastname" class="mb-2 rounded-3  border-2  border border-dark">
-        <input type="text" name="gender" placeholder="Gender" class="mb-2 rounded-3  border-2 border border-dark">
-        <input type="text" name="age" placeholder="Age" class="mb-2 rounded-3  border-2 border border-dark">
-        <button class="btn btn-primary btn-outline-dark">Add </button>
+
+
+    <form class="row g-3" action="<?= URL ?>users/addpassenger" method="post">
+        <h1 class="text-center my-4 fw-bold fs-2 ">Add passenger</h1>
+        <div class="col-md-6">
+            <label for="inputEmail4" class="form-label">Firstname</label>
+            <input type="text" name="firstname" placeholder="Firstname">
+        </div>
+        <div class="col-md-6">
+            <label for="inputEmail4" class="form-label">Lastname</label>
+            <input type="text" name="lastname" placeholder="Lastname">
+        </div>
+        <div class="col-12">
+            <label for="inputEmail4" class="form-label">Gender</label>
+            <input type="text" name="gender" placeholder="Gender">
+        </div>
+        <div class="col-6">
+            <label for="inputEmail4" class="form-label">Age</label>
+            <input type="text" name="age" placeholder="Age">
+        </div>
+        <div>
+            <button class="btn btn-primary btn-outline-dark">Add </button>
+        </div>
+
+
     </form>
 
+
+
+
+
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-
-
 </body>
 
 </html>

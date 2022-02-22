@@ -24,25 +24,29 @@ class registers extends controller
             ];
             $this->model=$this->model('register');
             $test = $this->model->login($data);
-            $test=$test->fetch_assoc();
-            if(empty($test['user'])){
+            $user=$test['user']->fetch_assoc();
+            $admin=$test['admin']->fetch_assoc();
+            //    echo '<pre>';
+            //    print_r($test);
+            //   return;
+            if(empty($user)){
                 echo '<script> alert("invalid password or email")</script>';
                 $this->view('register/login');
                 
             }
-            else if (!empty($test['user'])){
+            else if (!empty($user)){
                 // echo '<script> alert("valid password or email")</script>';
                 session_start();
-                $iduser=$test['iduser'];
+                $iduser=$user['iduser'];
                 $_SESSION['iduser']=$iduser; 
                 header("location: ".URL."users/index");
             }
-            if(empty($test['admin'])){
+            if(empty($admin)){
                 echo '<script> alert("invalid password or email")</script>';
                 $this->view('register/login');
                 
             }
-            else if (!empty($test['admin'])){
+            else if (!empty($admin)){
                 // echo '<script> alert("valid password or email")</script>';
                 session_start();
                 // $iduser=$test['iduser'];
