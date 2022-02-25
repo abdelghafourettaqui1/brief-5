@@ -25,11 +25,11 @@
 <h1 class="text-center my-4 fw-bold fs-2 ">edit flight</h1>
 
     <form class=" border border-dark border-3 rounded-3 col-sm-3 row  my-5 mx-auto p-4 " action="<?= URL ?>admins/editflight" method="post">
-        <input  type="text" name="departurePlace" placeholder="DeparturePlace" class="mb-4 rounded-3 border-2 border border-dark" >
-        <input type="text" name="arrivalPlace"  placeholder="ArrivalPlace" class="mb-4 rounded-3 border-2 border border-dark">
-        <input type="text" name="departureDate"  placeholder="DepartureDate" class="mb-4 rounded-3 border-2 border border-dark">
-        <input type="text" name="passengerNumber" placeholder="PassengerNumber" class="mb-4 rounded-3 border-2 border border-dark">
-        <input type="text" name="placeNumber" placeholder="PlaceNumber" class="mb-4 rounded-3 border-2 border border-dark">
+        <input  type="text" name="departurePlace" placeholder="Departure Place" class="mb-4 rounded-3 border-2 border border-dark" >
+        <input type="text" name="arrivalPlace"  placeholder="Arrival Place" class="mb-4 rounded-3 border-2 border border-dark">
+        <input type="date" name="departureDate"  placeholder="Departure Date" class="mb-4 rounded-3 border-2 border border-dark">
+        <input type="date" name="returnDate" placeholder="Return Date" class="mb-4 rounded-3 border-2 border border-dark">
+        <input type="text" name="placeNumber" placeholder="Place Number" class="mb-4 rounded-3 border-2 border border-dark">
         <input type="text" name="price" placeholder="Price" class="mb-4 rounded-3 border-2 border border-dark">
         <input type="hidden" name="id" value="<?=$data['id']?>">
         <button style="background-color: black; width: 158px; height: 40px;color: white; border-radius: 20px;">Edit </button>

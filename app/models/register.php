@@ -16,7 +16,7 @@ class register extends Connection
         $age=$data1['age'];
         $password=$data1['password'];
 
-        $this->connect()->query("INSERT INTO `user` ( `firstname`, `lastname`, `age`, `email`, `password`) VALUES ( '$firstname','$lastname', $age, '$email','$password')");
+          $this->connect()->query("INSERT INTO `user` ( `firstname`, `lastname`, `age`, `email`, `password`) VALUES ( '$firstname','$lastname', $age, '$email','$password')");
 
     }
 

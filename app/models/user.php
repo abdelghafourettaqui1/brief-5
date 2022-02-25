@@ -18,11 +18,11 @@ class user extends Connection
         }
         return $flight;
     }
-    
+
 
     public function getpassenger()
     {
-        $id=$_SESSION['iduser'];
+        $id = $_SESSION['iduser'];
         // echo $id;
         // return;
         $sql = "SELECT * FROM passenger where `iduser`=$id ";
@@ -41,8 +41,7 @@ class user extends Connection
     {
         // echo $first , $last ,$gender ,$age; 
         // return;
-        $id=$_SESSION['iduser'];
-
+        $id = $_SESSION['iduser'];
         $first = $first;
         $last = $last;
         $gender = $gender;
@@ -65,45 +64,61 @@ class user extends Connection
         $age = $age;
         $this->connect()->query("UPDATE `passenger` SET `firstname` = '$firstname', `lastname` = '$lastname' ,`gender` = '$gender' ,`age` = $age   WHERE `passenger`.`idPassenger` =  $idPassenger");
     }
-    public function checkplace(){
-        $idflight= $_SESSION['idflight'];
+    public function checkplace()
+    {
+        $idflight = $_SESSION['idflight'];
         // echo $idflight;
-        $count= $this->connect()->query("SELECT COUNT(idflight) AS count FROM `booking` WHERE `idflight`=$idflight");
-        $seats=$this->connect()->query("SELECT placeNumber FROM `flight` WHERE `id`=$idflight");
-        echo"<pre>";
-        $count=$count->fetch_assoc();
-        $seats=$seats->fetch_assoc();
-        $results= $seats['placeNumber']-$count['count'];
+        $count = $this->connect()->query("SELECT COUNT(idflight) AS count FROM `booking` WHERE `idflight`=$idflight");
+        $seats = $this->connect()->query("SELECT placeNumber FROM `flight` WHERE `id`=$idflight");
+        echo "<pre>";
+        $count = $count->fetch_assoc();
+        $seats = $seats->fetch_assoc();
+        $results = $seats['placeNumber'] - $count['count'];
         return $results;
     }
 
-    public function insertbooking($idpassenger){
-        $idflight= $_SESSION['idflight'];
-        // echo $idflight;
-        // $count= $this->connect()->query("SELECT COUNT(idflight) FROM `booking` WHERE `idflight`=$idflight");
-        // $seats=$this->connect()->query("SELECT placeNumber FROM `flight` WHERE `id`=$idflight");
-        // $count->num_rows;
-        // $seats->num_rows;
-        // echo"<pre>";
-        // $count=$count->fetch_assoc();
-        // $seats=$seats->fetch_assoc();
-        // var_dump($count);
-        // var_dump($seats);
-        // $results= $seats['placeNumber']-$count['count'];
-        // echo $results;
-        // return;
-        // if($results>0){
-            $idpassenger1=$idpassenger;
-            $iduser=$_SESSION['iduser'];
-            $idflight= $_SESSION['idflight'];
-            $this->connect()->query("INSERT INTO `booking` ( `iduser`, `idflight`, `idpassenger`) VALUES ( $iduser , $idflight,$idpassenger1)");
-        // }
-        // else{
-            // echo '<scriprt> alert("Sorry all the seats are reserved") </script>';
-            // echo '<script> alert("Sorry all the seats are reserved")</script>';
-            // $this->view('users/index');
-        // }
+    public function insertbooking($idpassenger)
+    {
+        $idflight = $_SESSION['idflight'];
+        $idpassenger1 = $idpassenger;
+        $iduser = $_SESSION['iduser'];
+        $idflight = $_SESSION['idflight'];
+        $flightType = $_SESSION['flightType'];
+        $this->connect()->query("INSERT INTO `booking` ( `iduser`, `idflight`, `flightType` , `idpassenger`) VALUES ( $iduser , $idflight, '$flightType',$idpassenger1 )");
+    }
+    // booking.idbooking , booking.idflight,  booking.idPassenger , booking.flightType
 
+    public function checkbooking()
+    {
+        $id = $_SESSION['iduser'];
+        // $data = $this->connect()->query("SELECT flight.*, booking.idbooking ,booking.idflight, booking.iduser , booking.idPassenger , booking.flightType FROM flight JOIN booking ON booking.iduser=$id AND booking.idflight= `id`  ");
+        $data=$this->connect()->query("SELECT flight.*, booking.idbooking ,booking.idflight, booking.iduser , booking.idPassenger , booking.flightType ,p.idpassenger ,p.firstname , p.lastname ,p.iduser FROM flight JOIN booking  ON booking.iduser= $id AND booking.idflight= `id` JOIN `passenger` AS p ON p.iduser = $id  AND p.idPassenger=booking.idPassenger");
+
+        // $result = $this->connect()->query($data);
+        $numRows = $data->num_rows;
+        $book = [];
+        if ($numRows > 0) {
+            while ($row = $data->fetch_assoc()) {
+                $book[] = $row;
+            }
+        }
+        return $book;
+    
+    }
+
+    public function deletebook($id){
+        $ID = $id;
+        // echo $id;
+        // return;
+        $this->connect()->query("DELETE FROM booking WHERE idbooking=$ID");
 
     }
+    public function updatebook( $idflight, $idpassenger, $idbooking, $flighttype ){
+        
+
+        $this->connect()->query("UPDATE `booking` SET `idflight` = $idflight , `idpassenger` = $idpassenger  ,`flighttype` = '$flighttype'  WHERE `idbooking` = $idbooking");
+    }
 }
+    
+
+    

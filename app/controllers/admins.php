@@ -15,12 +15,12 @@ class admins extends controller
       $departurePlace = $_POST['departurePlace'];
       $arrivalPlace = $_POST['arrivalPlace'];
       $departureDate = $_POST['departureDate'];
-      $passengerNumber = $_POST['passengerNumber'];
+      $returnDate = $_POST['returnDate'];
       $placeNumber = $_POST['placeNumber'];
       $price = $_POST['price'];
 
       $this->model = $this->model('admin');
-      $this->model->insertFlight($departurePlace, $arrivalPlace, $departureDate, $passengerNumber, $placeNumber, $price);
+      $this->model->insertFlight($departurePlace, $arrivalPlace, $departureDate, $returnDate, $placeNumber, $price);
     }
   }
   public function deleteflight()
@@ -38,11 +38,11 @@ class admins extends controller
       $departurePlace = $_POST['departurePlace'];
       $arrivalPlace = $_POST['arrivalPlace'];
       $departureDate = $_POST['departureDate'];
-      $passengerNumber = $_POST['passengerNumber'];
+      $returnDate = $_POST['returnDate'];
       $placeNumber = $_POST['placeNumber'];
       $price = $_POST['price'];
       $this->model = $this->model('admin');
-      $this->model->update($id, $departurePlace, $arrivalPlace, $departureDate, $passengerNumber, $placeNumber, $price);
+      $this->model->update($id, $departurePlace, $arrivalPlace, $departureDate, $returnDate, $placeNumber, $price);
     }
   }
 
@@ -56,5 +56,17 @@ class admins extends controller
   { 
       $this->view('home/addflight');
     
+  }
+
+  public function checkreservation()
+  {
+    
+    $this->model = $this->model('admin');
+    
+    $booking = $this->model->checkbooking();
+    
+    $this->view('home/displaybooking', ['book' => $booking]);
+    // echo "I'm here";
+    // return;
   }
 }

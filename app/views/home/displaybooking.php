@@ -1,16 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../public/css/homecss.css">
     <script src="https://kit.fontawesome.com/b5682ff9f5.js" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
-
-    <title>flightDream</title>
+    <title>flight dream</title>
 </head>
 
 <body>
@@ -23,71 +22,55 @@
             <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 </ul>
-                <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-dark" type="submit">Search</button>
-                </form>
             </div>
         </div>
     </nav>
-    <h1 class="text-center my-4 fw-bold fs-2 ">Flight list</h1>
 
-    <form action=" <?= URL ?> admins/showFormadd " method="post" >
-        <button type="submit" class=" mx-5 my-5  p-3 mb-2 bg-primary text-white btn btn-outline-primary"> <i  class=" me-2 fa-solid fa-square-plus"></i>Add flight </button>
-    </form>
+    <h1 class="text-center my-4 fw-bold fs-2 "> Reservation </h1>
     <table class="table mx-0 my-5">
         <thead class="table-light">
             <tr>
+                <th>ID booking</th>
                 <th>ID flight</th>
                 <th>Departure place</th>
                 <th>Arrival place</th>
                 <th>Departure date</th>
-                <th>Return Date</th>
-                <th>Place number</th>
+                <th class="return-date"> Return date </th>
                 <th>Price</th>
-                <th>Delete flight</th>
-                <th>Edit flight</th>
-
+                <th>ID passenger</th>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Flight type</th>
             </tr>
         </thead>
         <tbody>
             <?php
-
+            //    echo"<pre>";
+            //     print_r($data);
+            //     return;
             ?>
-            <?php foreach ($data['admin'] as $datavalue) : ?>
+            <?php foreach ($data['book'] as $datavalue) : ?>
                 <tr>
+                <td><?= $datavalue['idbooking']  ?></td>
                     <td><?= $datavalue['id']  ?></td>
                     <td><?= $datavalue['departurePlace'] ?></td>
                     <td><?= $datavalue['arrivalPlace']  ?> </td>
                     <td><?= $datavalue['departureDate']  ?></td>
-                    <td><?= $datavalue['returnDate'] ?></td>
-                    <td><?= $datavalue['placeNumber'] ?></td>
-                    <td><?= $datavalue['price'] . "<br>" ?></td>
-                    <td>
-                        <form action="deleteflight" method="post">
-                            <input type="hidden" name='delete' value="<?= $datavalue['id'] ?>">
-                            <button type="submit" class="btn btn-outline-danger">Delete</button>
-                        </form>
-                    </td>
-                    <td>
-                        <form action="<?= URL ?>admins/showForm" method="post">
-                            <input type="hidden" name='edit' value="<?= $datavalue['id'] ?>">
-                            <button type="submit" class="btn btn-outline-success">Update</button>
-                        </form>
-                    </td>
+                    <td class="return-date"><?= $datavalue['returnDate']  ?></td>
+                    <td><?= $datavalue['price'] ?></td>
+                    <td><?= $datavalue['idPassenger']  ?></td>
+                    <td><?= $datavalue['firstname']  ?></td>
+                    <td><?= $datavalue['lastname']  ?></td>
+                    <td><?= $datavalue['flightType'] ?></td>
+                   
+
                 </tr>
             <?php endforeach; ?>
         </tbody>
     </table>
 
 
-
-
-
-
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-
 </body>
 
 </html>

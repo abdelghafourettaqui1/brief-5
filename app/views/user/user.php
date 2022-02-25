@@ -1,10 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<!-- <?php
 
-        // print_r($_SESSION);
-
-        ?> -->
 
 <head>
     <meta charset="UTF-8">
@@ -38,13 +34,14 @@
         <thead class="table-light">
             <tr>
                 <th>ID passenger </th>
-                <th>ID booking</th>
+             
                 <th>Firstname</th>
                 <th>Lastname</th>
                 <th>Gender</th>
                 <th>Age</th>
                 <th>Delete passenger</th>
                 <th>Edit passenger</th>
+                <th>Validate</th>
 
             </tr>
         </thead>
@@ -57,7 +54,6 @@
             <?php foreach ($data['user'] as $datavalue) : ?>
                 <tr>
                     <td><?= $datavalue['idPassenger']  ?></td>
-                    <td><?= $datavalue['idbooking'] ?></td>
                     <td><?= $datavalue['firstname']  ?> </td>
                     <td><?= $datavalue['lastname']  ?></td>
                     <td><?= $datavalue['gender'] ?></td>

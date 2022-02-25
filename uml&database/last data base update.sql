@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mar. 22 fév. 2022 à 15:31
+-- Généré le : ven. 25 fév. 2022 à 15:51
 -- Version du serveur : 10.4.22-MariaDB
 -- Version de PHP : 8.1.2
 
@@ -50,22 +50,20 @@ CREATE TABLE `booking` (
   `idbooking` int(11) NOT NULL,
   `idflight` int(100) DEFAULT NULL,
   `iduser` int(100) DEFAULT NULL,
-  `idpassenger` int(100) NOT NULL
+  `idPassenger` int(11) DEFAULT NULL,
+  `flightType` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Déchargement des données de la table `booking`
 --
 
-INSERT INTO `booking` (`idbooking`, `idflight`, `iduser`, `idpassenger`) VALUES
-(1, 12, 4, 0),
-(2, 12, 5, 0),
-(3, 12, 2, 0),
-(4, 12, 1, 9),
-(5, 12, 1, 10),
-(6, 12, 1, 9),
-(7, 12, 1, 9),
-(8, 12, 1, 11);
+INSERT INTO `booking` (`idbooking`, `idflight`, `iduser`, `idPassenger`, `flightType`) VALUES
+(29, 13, 1, 13, 'Round trip'),
+(30, 13, 1, 15, 'Round-trip'),
+(36, 12, 1, 13, ''),
+(37, 12, 1, 14, ''),
+(38, 13, 1, 15, '');
 
 -- --------------------------------------------------------
 
@@ -78,7 +76,7 @@ CREATE TABLE `flight` (
   `departurePlace` varchar(100) DEFAULT NULL,
   `arrivalPlace` varchar(100) DEFAULT NULL,
   `departureDate` varchar(100) DEFAULT NULL,
-  `passengerNumber` int(100) DEFAULT NULL,
+  `returnDate` date DEFAULT NULL,
   `placeNumber` int(100) DEFAULT NULL,
   `price` int(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -87,8 +85,10 @@ CREATE TABLE `flight` (
 -- Déchargement des données de la table `flight`
 --
 
-INSERT INTO `flight` (`id`, `departurePlace`, `arrivalPlace`, `departureDate`, `passengerNumber`, `placeNumber`, `price`) VALUES
-(12, 'Safi', 'Paris', '2022-02-01', 1, 5, 500);
+INSERT INTO `flight` (`id`, `departurePlace`, `arrivalPlace`, `departureDate`, `returnDate`, `placeNumber`, `price`) VALUES
+(12, 'Marrakesh', 'Paris', '2022-02-26', '2022-02-19', 31, 655),
+(13, 'casablanca', 'algerie', '2022-02-08', '2022-02-26', 31, 855),
+(14, 'Safi', 'Paris', '2022-02-05', '2022-02-26', 12, 855);
 
 -- --------------------------------------------------------
 
@@ -111,9 +111,9 @@ CREATE TABLE `passenger` (
 --
 
 INSERT INTO `passenger` (`idPassenger`, `iduser`, `idbooking`, `firstname`, `lastname`, `gender`, `age`) VALUES
-(9, 1, NULL, 'Kibo', 'Ross', 'Maiores sint quae di', 34),
-(10, 1, NULL, 'hamza1', 'Wooten', 'Dicta dignissimos ar', 23),
-(11, 1, NULL, 'Kibo', 'Ross', 'Dicta dignissimos ar', 21);
+(13, 1, NULL, 'Laura', 'Stafford', 'male', 32),
+(14, 1, NULL, 'Holly', 'Ross', 'male', 32),
+(15, 1, NULL, 'Kibo', 'Ross', 'male', 212);
 
 -- --------------------------------------------------------
 
@@ -163,7 +163,8 @@ ALTER TABLE `admin`
 ALTER TABLE `booking`
   ADD PRIMARY KEY (`idbooking`),
   ADD KEY `if k foreigner` (`idflight`),
-  ADD KEY `if j foreigner` (`iduser`);
+  ADD KEY `if j foreigner` (`iduser`),
+  ADD KEY `passenger` (`idPassenger`);
 
 --
 -- Index pour la table `flight`
@@ -192,25 +193,25 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT pour la table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `idadmin` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idadmin` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `booking`
 --
 ALTER TABLE `booking`
-  MODIFY `idbooking` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `idbooking` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT pour la table `flight`
 --
 ALTER TABLE `flight`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT pour la table `passenger`
 --
 ALTER TABLE `passenger`
-  MODIFY `idPassenger` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `idPassenger` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT pour la table `user`
@@ -227,7 +228,8 @@ ALTER TABLE `user`
 --
 ALTER TABLE `booking`
   ADD CONSTRAINT `if j foreigner` FOREIGN KEY (`iduser`) REFERENCES `user` (`iduser`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `if k foreigner` FOREIGN KEY (`idflight`) REFERENCES `flight` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `if k foreigner` FOREIGN KEY (`idflight`) REFERENCES `flight` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `passenger` FOREIGN KEY (`idPassenger`) REFERENCES `passenger` (`idPassenger`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `passenger`
