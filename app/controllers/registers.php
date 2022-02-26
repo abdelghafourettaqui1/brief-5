@@ -14,7 +14,7 @@ class registers extends controller
 
     public function login()
     {
-        // if($_SERVER('REQUEST_METHOD')=='POST')
+        if(isset($_POST['login'])){
             $data = [
                 'email' => $_POST["email"],
                 'password' => $_POST["password"]
@@ -24,13 +24,14 @@ class registers extends controller
             $user = $test['user']->fetch_assoc();
             $admin = $test['admin']->fetch_assoc();
             //    echo '<pre>';
-            //    print_r($test);
+            //    print_r($admin['idadmin']);
             //   return;
 
             if (empty($user)) {
                 echo '<script> alert("invalid password or email")</script>';
                 $this->view('register/login');
-            } else if (!empty($user)) {
+            }
+             else if (!empty($user)) {
                 session_start();
                 $iduser = $user['iduser'];
                 $_SESSION['iduser'] = $iduser;
@@ -39,10 +40,20 @@ class registers extends controller
             if (empty($admin)) {
                 echo '<script> alert("invalid password or email")</script>';
                 $this->view('register/login');
-            } else if (!empty($admin)) {
+            } 
+            elseif (!empty($admin)) {
                 session_start();
+                 $_SESSION['idadmin'] = $admin['idadmin'];
+
                 header("location: " . URL . "admins/showAllflight");
             }
+        }
+        else{
+            // echo "I'm here";
+            // return;
+            $this->view('register/login');
+        }
+         
     }
 
 

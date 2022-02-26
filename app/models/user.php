@@ -1,7 +1,7 @@
 <?php
 
 require_once '../app/core/connection.php';
-session_start();
+
 
 class user extends Connection
 {
@@ -22,6 +22,10 @@ class user extends Connection
 
     public function getpassenger()
     {
+        if (empty($_SESSION['iduser'])) {
+
+            header('Refresh: 0; URL=' . URL . ' registers/login');
+        }
         $id = $_SESSION['iduser'];
         // echo $id;
         // return;
@@ -41,6 +45,10 @@ class user extends Connection
     {
         // echo $first , $last ,$gender ,$age; 
         // return;
+        if (empty($_SESSION['iduser'])) {
+
+            header('Refresh: 0; URL=' . URL . ' registers/login');
+        }
         $id = $_SESSION['iduser'];
         $first = $first;
         $last = $last;
@@ -90,9 +98,13 @@ class user extends Connection
 
     public function checkbooking()
     {
+        if (empty($_SESSION['iduser'])) {
+
+            header('Refresh: 0; URL=' . URL . ' registers/login');
+        }
         $id = $_SESSION['iduser'];
         // $data = $this->connect()->query("SELECT flight.*, booking.idbooking ,booking.idflight, booking.iduser , booking.idPassenger , booking.flightType FROM flight JOIN booking ON booking.iduser=$id AND booking.idflight= `id`  ");
-        $data=$this->connect()->query("SELECT flight.*, booking.idbooking ,booking.idflight, booking.iduser , booking.idPassenger , booking.flightType ,p.idpassenger ,p.firstname , p.lastname ,p.iduser FROM flight JOIN booking  ON booking.iduser= $id AND booking.idflight= `id` JOIN `passenger` AS p ON p.iduser = $id  AND p.idPassenger=booking.idPassenger");
+        $data = $this->connect()->query("SELECT flight.*, booking.idbooking ,booking.idflight, booking.iduser , booking.idPassenger , booking.flightType ,p.idpassenger ,p.firstname , p.lastname ,p.iduser FROM flight JOIN booking  ON booking.iduser= $id AND booking.idflight= `id` JOIN `passenger` AS p ON p.iduser = $id  AND p.idPassenger=booking.idPassenger");
 
         // $result = $this->connect()->query($data);
         $numRows = $data->num_rows;
@@ -103,22 +115,19 @@ class user extends Connection
             }
         }
         return $book;
-    
     }
 
-    public function deletebook($id){
+    public function deletebook($id)
+    {
         $ID = $id;
         // echo $id;
         // return;
         $this->connect()->query("DELETE FROM booking WHERE idbooking=$ID");
-
     }
-    public function updatebook( $idflight, $idpassenger, $idbooking, $flighttype ){
-        
+    public function updatebook($idflight, $idpassenger, $idbooking, $flighttype)
+    {
+
 
         $this->connect()->query("UPDATE `booking` SET `idflight` = $idflight , `idpassenger` = $idpassenger  ,`flighttype` = '$flighttype'  WHERE `idbooking` = $idbooking");
     }
 }
-    
-
-    

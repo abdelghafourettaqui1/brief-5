@@ -85,7 +85,7 @@ class users extends controller
       if ($results > 0) {
         $this->model = $this->model('user');
         $this->model->insertbooking($idpassenger);
-        header('Refresh: 0; URL=' . URL . 'users/index');
+        header('Refresh: 0; URL=' . URL . 'users/booking');
       } else {
         echo '<script> alert("Sorry all the seats are reserved")</script>';
         header('Refresh: 0; URL=' . URL . 'users/index');
@@ -146,4 +146,12 @@ class users extends controller
       
     }
   }
+ 
+  public function logout(){
+    session_start();
+    unset($_SESSION['iduser']);
+    session_destroy();
+    header('Refresh: 0; URL=' . URL . ' registers/login');
+  } 
+
 }

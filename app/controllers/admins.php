@@ -21,6 +21,8 @@ class admins extends controller
 
       $this->model = $this->model('admin');
       $this->model->insertFlight($departurePlace, $arrivalPlace, $departureDate, $returnDate, $placeNumber, $price);
+      header('location:'.URL.'admins/showAllflight');
+
     }
   }
   public function deleteflight()
@@ -29,6 +31,8 @@ class admins extends controller
       $id = $_POST['delete'];
       $this->model = $this->model('admin');
       $this->model->delete($id);
+      header('location:'.URL.'admins/showAllflight');
+
     }
   }
   public function editflight()
@@ -43,6 +47,7 @@ class admins extends controller
       $price = $_POST['price'];
       $this->model = $this->model('admin');
       $this->model->update($id, $departurePlace, $arrivalPlace, $departureDate, $returnDate, $placeNumber, $price);
+      header('location:'.URL.'admins/showAllflight');
     }
   }
 
@@ -69,4 +74,9 @@ class admins extends controller
     // echo "I'm here";
     // return;
   }
+  public function logout(){
+    session_start();
+    session_destroy();
+    header('Refresh: 0; URL=' . URL . ' registers/login');
+  } 
 }

@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<?php
+
+
+if (empty($_SESSION)) {
+
+    header('location:' . URL . 'registers/login');
+}
+
+?>
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,17 +23,30 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-info">
         <div class="container-fluid">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+            <a class="navbar-brand" href="<?= URL . 'users/index' ?>"><img src="./../../public/img/logo4.svg" alt="logo"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <a class="navbar-brand" href="#"><img src="../../../public/img/logo4.svg" alt="logo"></a>
-            <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <div class="collapse navbar-collapse " id="navbarSupportedContent">
+                <ul class="navbar-nav ms-5 me-auto mb-2 mb-lg-0 ">
+                    <li class="nav-item">
+                        <a class="nav-link fw-bold active" aria-current="page" href="<?= URL . 'users/index' ?>">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-bold active " href="<?= URL . 'users/booking' ?>">Reservation</a>
+                    </li>
                 </ul>
-
+                <form class="d-flex" method="post" action="<?= URL ?>users/logout">
+                    <button class="btn btn-outline-dark" type="submit">logout</button>
+                </form>
             </div>
         </div>
     </nav>
+
+
+
+
+
     <table class="table mx-0 my-5">
         <thead class="table-light">
             <tr>
@@ -49,11 +72,11 @@
             //     print_r($data);
             //     return;
             ?>
-            <?php 
+            <?php
             // if(isset($_SESSION)): 
             ?>
 
-          
+
             <?php foreach ($data['user'] as $datavalue) : ?>
                 <tr>
                     <td><?= $datavalue['id'] ?></td>
@@ -81,33 +104,34 @@
         var round_trip = document.querySelector('.round-trip');
         var one_way = document.querySelector('.one-way');
         var return_date = document.querySelectorAll('.return-date');
-        let flightType=document.querySelector('.flightType');
-        var flight=0;
+        let flightType = document.querySelector('.flightType');
+        var flight = 0;
 
         round_trip.addEventListener('click', open);
 
         function open() {
             return_date.forEach(e => {
                 e.classList.remove("d-none");
-                e.classList.add("d-block");   
-                flightType.value=1
+                e.classList.add("d-block");
+                flightType.value = 1
+                
+
             });
-          
+
         }
+      
 
 
         one_way.addEventListener('click', close);
 
         function close() {
-            return_date.forEach(e => { 
+            return_date.forEach(e => {
                 e.classList.remove("d-block");
-                e.classList.add("d-none");   
-                flightType.value=0;
+                e.classList.add("d-none");
+                flightType.value = 0;
             });
-            
-        }
-        
 
+        }
     </script>
 
 </body>

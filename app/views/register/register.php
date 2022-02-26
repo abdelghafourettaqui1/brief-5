@@ -11,38 +11,38 @@
 </head>
 
 <body>
-  <section class="vh-100 bg-image" style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp');">
-    <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+  <section class="py-5" style=" background-size:cover; background-image: url('https://www.airport-technology.com/wp-content/uploads/sites/14/2022/01/shutterstock_758602234-min-1038x778.jpg');">
+    <div class="mask d-flex align-items-center h-100 ">
       <div class="container h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
           <div class="col-12 col-md-9 col-lg-7 col-xl-6">
-            <div class="card" style="border-radius: 15px;">
-              <div class="card-body p-5">
+            <div class="card pt-1  bg-transparent" style="border-radius: 15px;">
+              <div class="card-body ">
                 <h2 class="text-uppercase text-center mb-5">Create an account</h2>
 
                 <form action="<?= URL ?>registers/info" method="post">
 
                   <div class="form-outline mb-4">
-                    <input name="firstname" type="text" id="form3Example1cg" class="form-control form-control-lg" placeholder="Firstname" />
+                    <input name="firstname" type="text" id="form3Example1cg" class="form-control  bg-transparent border border-dark   form-control-lg" placeholder="Firstname" />
                   </div>
                   <div class="form-outline mb-4">
-                    <input name="lastname" type="text" id="form3Example1cg" class="form-control form-control-lg" placeholder="Lastname"  />
+                    <input name="lastname" type="text" id="form3Example1cg" class="form-control   bg-transparent border border-dark form-control-lg" placeholder="Lastname"  />
                   </div>
                   <div class="form-outline mb-4">
-                    <input name="age" type="text" id="form3Example1cg" class="form-control form-control-lg" placeholder="Your age" />
+                    <input name="age" type="text" id="form3Example1cg" class="form-control bg-transparent border border-dark form-control-lg" placeholder="Your age" />
                     
                   </div>
 
                   <div class="form-outline mb-4">
-                    <input name="email" type="email" id="form3Example3cg" class="form-control form-control-lg" placeholder="Your email"/>
+                    <input name="email" type="email" id="form3Example3cg" class="form-control bg-transparent  border border-dark form-control-lg" placeholder="Your email"/>
                   </div>
 
                   <div class="form-outline mb-4">
-                    <input name="password" type="password" id="form3Example4cg" class="form-control form-control-lg" placeholder="Password" />
+                    <input name="password" type="password" id="form3Example4cg" class="form-control  bg-transparent border border-dark form-control-lg" placeholder="Password" />
                   </div>
 
                   <div class="form-outline mb-4">
-                    <input name="repeat" type="password" id="form3Example4cdg" class="form-control form-control-lg" placeholder="Repeat your password" />
+                    <input name="repeat" type="password" id="form3Example4cdg" class="form-control bg-transparent border border-dark form-control-lg" placeholder="Repeat your password" />
                   </div>
 
                   <div class="form-check d-flex justify-content-center mb-5">
@@ -53,10 +53,10 @@
                   </div>
 
                   <form  class="d-flex justify-content-center">
-                    <button name="register" type="submit" class="btn btn-primary btn-block btn-lg gradient-custom-4 text-body">Register</button>
+                    <button name="register" type="submit" class="btn btn-primary btn-block btn-lg  text-body">Register</button>
                   </form>
 
-                  <p class="text-center text-muted mt-5 mb-0">Have already an account? <a href="<?= URL ?> registers/showlogin" class="fw-bold text-body"><u>Login here</u></a></p>
+                  <p class="text-center text-dark fw-bold mt-5 mb-0">Have already an account? <a href="<?= URL ?> registers/showlogin" class="fw-bold text-body"><u>Login here</u></a></p>
 
                 </form>
 

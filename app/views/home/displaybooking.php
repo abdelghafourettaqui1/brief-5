@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php 
+session_start();
 
+
+if( empty($_SESSION['idadmin'])){
+     header('location:'.URL.'registers/login');
+ }
+
+?>
 
 <head>
     <meta charset="UTF-8">
@@ -13,18 +21,28 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-info">
-        <div class="container-fluid">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <a class="navbar-brand" href="#"><img src="./../../public/img/logo4.svg" alt="logo"></a>
-            <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                </ul>
-            </div>
-        </div>
-    </nav>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-info">
+  <div class="container-fluid">
+  <a class="navbar-brand" href="<?= URL.'admins/showAllflight'?>"><img src="./../../public/img/logo4.svg" alt="logo"></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse " id="navbarSupportedContent">
+      <ul class="navbar-nav ms-5 me-auto mb-2 mb-lg-0 ">
+        <li class="nav-item">
+          <a class="nav-link fw-bold active" aria-current="page" href="<?= URL.'admins/showAllflight'?>">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link fw-bold active "  href="<?= URL.'admins/checkreservation'?>">Reservation</a>
+        </li>
+      </ul>
+      <form class="d-flex" method="post" action="<?= URL ?>admins/logout">
+        <button class="btn btn-outline-dark" type="submit">logout</button>
+      </form>
+    </div>
+  </div>
+</nav>
 
     <h1 class="text-center my-4 fw-bold fs-2 "> Reservation </h1>
     <table class="table mx-0 my-5">
